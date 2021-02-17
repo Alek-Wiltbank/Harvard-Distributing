@@ -1,0 +1,16 @@
+function remove_add_to_cart_option( $purchasable, $product ){
+	
+	if( $product->get_price() == 0 ) { ?>
+		<style>
+		.hfb-tr-grouped-product .hfb-image-and-table .hfb-table-grouped-products .woocommerce-grouped-product-list-item__quantity a {
+			display: none !important;
+		};
+		</style> <?php
+		
+        $purchasable = false; 
+	};
+	return $purchasable;
+};
+add_filter( 'woocommerce_is_purchasable', 'remove_add_to_cart_option', 10, 2 );
+
+
