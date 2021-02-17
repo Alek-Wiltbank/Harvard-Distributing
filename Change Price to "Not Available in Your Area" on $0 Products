@@ -1,0 +1,20 @@
+function hfb_free_price_to_not_available( $price, $product ){
+    
+	if ( $product->get_price() == 0 ) {
+		?>
+<style> .single_add_to_cart_button {display: none !important;}</style>
+
+		<?php
+		if ( is_user_logged_in() ) {
+			$price = '<span class="woocommerce-Price-amount amount" style="text-align: center;">Not Available in Your Area</span>';
+			return $price;
+		} else {
+			$price = '<span class="woocommerce-Price-amount amount" style="text-align: center;">Log in to View Pricing</span>';
+			return $price;
+		};
+    } else {
+		return $price;
+	};	
+};
+
+add_filter( 'woocommerce_get_price_html', 'hfb_free_price_to_not_available', 9999, 2 );
