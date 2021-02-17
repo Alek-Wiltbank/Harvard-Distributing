@@ -1,0 +1,12 @@
+add_action( 'woocommerce_grouped_product_list_before_price', 'wc_grouped_product_thumbnail' );
+  
+function wc_grouped_product_thumbnail( $product ) {
+    $image_size = array( 120, 120 );
+    $attachment_id = get_post_meta( $product->get_id(), '_thumbnail_id', true );
+    $link = get_the_permalink( $product->get_id() );
+    ?>
+    <td class="woocommerce-grouped-product-thumbnail">
+        <a href="<?php echo $link; ?>" > <?php echo wp_get_attachment_image( $attachment_id, $image_size ); ?> </a>
+    </td>
+    <?php
+}
